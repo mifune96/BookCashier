@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">BookChasir</string>
+    <string name="title_activity_sigin_in">SiginInActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="welcome_user">Welcome User!</string>
+    <string name="codeathome">Codeathome</string>
+    <string name="bookstore">BookStore</string>
+    <string name="email">Email</string>
+    <string name="passsword">passsword</string>
+    <string name="sign_in">Sign in</string>
+    <string name="search">search...</string>
+    <string name="clear_call">Clear call</string>
+    <string name="total_payment">Total payment</string>
+    <string name="_0">$0</string>
+    <string name="checkout">Checkout (</string>
+    <string name="book">Book )</string>
+    <string name="_10">10</string>
+    <string name="author">Author</string>
+    <string name="name_autor">David Bach</string>
+    <string name="_stock">Stock :</string>
+    <string name="_9">9</string>
+    <string name="faktor_latters">Faktor Latters</string>
+    <string name="published_at">Published at</string>
+    <string name="_02_07_2022">02/07/2022</string>
+    <string name="_21_01">$21.01</string>
+    <string name="_56">56</string>
+    <string name="transaction">Transaction</string>
+    <string name="id">id :</string>
+    <string name="_3489563">3489563</string>
+    <string name="book_01_book_02_book_03">Book 01, Book 02, Book 03...</string>
+    <string name="_4">+4</string>
+    <string name="_22_juni_2022">22 Juni 2022</string>
+    <string name="_12_19_am">12:19 AM</string>
+    <string name="_22_juni_2022_00_18_am">22 Juni 2022, 00:18 AM</string>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_texttransaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="54dp"
+        android:layout_marginStart="41dp"
+        android:text="@string/transaction"
+        android:textSize="20sp"
+        android:layout_marginBottom="37dp"
+        app:layout_constraintBottom_toTopOf="@+id/edt_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_search"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/edtsearch_bg"
+        android:drawableEnd="@drawable/ic_searchicon"
+        android:elevation="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/search"
+        android:padding="10dp"
+        android:textSize="13sp"
+        android:layout_marginStart="41dp"
+        android:layout_marginEnd="192dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_produk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_texttransaksi" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_produk"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="34dp"
+        tools:listitem="@layout/transaction_item"
+        android:orientation="vertical"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="41dp"
+        android:layout_marginEnd="192dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_search" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
