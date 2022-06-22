@@ -6,18 +6,17 @@
     android:layout_marginTop="14dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
-        android:weightSum="6"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:padding="10dp">
 
         <LinearLayout
+            android:id="@+id/layout_id"
+            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -42,17 +41,19 @@
         </LinearLayout>
 
         <View
-            android:layout_weight="0"
+            android:id="@+id/layout_idview"
+            android:layout_toEndOf="@id/layout_id"
             android:layout_width="2dp"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:layout_marginStart="18dp"
             android:background="@color/grey" />
 
         <LinearLayout
+            android:id="@+id/layout_book"
+            android:layout_toEndOf="@id/layout_idview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -77,17 +78,19 @@
         </LinearLayout>
 
         <View
-            android:layout_weight="0"
+            android:id="@+id/layout_bookview"
+            android:layout_toEndOf="@id/layout_book"
             android:layout_width="2dp"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:layout_marginStart="17dp"
             android:background="@color/grey" />
 
         <LinearLayout
+            android:id="@+id/layout_date"
+            android:layout_toEndOf="@id/layout_bookview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -102,14 +105,14 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_weight="1"
             android:id="@+id/btn_transaksidetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/ic_btn_trankasidetail" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
