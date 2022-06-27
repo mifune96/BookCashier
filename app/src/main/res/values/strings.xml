@@ -39,4 +39,14 @@
     <string name="_22_juni_2022">22 Juni 2022</string>
     <string name="_12_19_am">12:19 AM</string>
     <string name="_22_juni_2022_00_18_am">22 Juni 2022, 00:18 AM</string>
+    <string name="total">Total</string>
+    <string name="_35_00">$35.00</string>
+    <string name="done">Done</string>
+    <string name="detail_transaction">Detail Transaction</string>
+    <string name="_35_00_payment">$35.00 Payment</string>
+    <string name="book_01">Book 01</string>
+    <string name="_2_70">$2.70</string>
+    <string name="x">x</string>
+    <string name="_2">2</string>
+    <string name="_5_40">$5.40</string>
 </resources>

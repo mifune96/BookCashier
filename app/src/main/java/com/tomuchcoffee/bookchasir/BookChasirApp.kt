@@ -2,6 +2,10 @@ package com.tomuchcoffee.bookchasir
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
+import com.tomuchcoffee.bookchasir.source.network.networkModule
+import com.tomuchcoffee.bookchasir.source.network.repositoryModule
+import com.tomuchcoffee.bookchasir.ui.auth.siginInModule
+import com.tomuchcoffee.bookchasir.ui.auth.siginViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,11 +20,14 @@ class BookChasirApp : Application() {
         Timber.e("run base application")
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        startKoin{
+        startKoin {
             androidLogger()
             androidContext(this@BookChasirApp)
             modules(
-
+                networkModule,
+                repositoryModule,
+                siginViewModel,
+                siginInModule
             )
 
         }
