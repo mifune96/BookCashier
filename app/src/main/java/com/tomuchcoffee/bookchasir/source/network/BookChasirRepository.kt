@@ -16,8 +16,8 @@ class BookChasirRepository(
 ) {
     suspend fun Sigin(
         auth: AuthRequest
-    ): Resource<AuthResponse> {
-        val res = api.auth(auth)
+    ): AuthResponse {
+//        val res = api.auth(auth)
 //        prefren.setPref(Constant.TOKEN, res.data?.token.toString())
         return api.auth(auth)
     }

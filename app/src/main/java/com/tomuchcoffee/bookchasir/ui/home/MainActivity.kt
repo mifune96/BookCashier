@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         prefren = SharePrefren(this)
 
+
+
         Log.d(TAG, "isi pref: "+prefren.getString(Constant.TOKEN))
 
 

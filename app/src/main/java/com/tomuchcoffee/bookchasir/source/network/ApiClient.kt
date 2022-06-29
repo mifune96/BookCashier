@@ -1,6 +1,5 @@
 package com.tomuchcoffee.bookchasir.source.network
 
-import com.tomuchcoffee.bookchasir.source.model.Resource
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthResponse
 import retrofit2.http.Body
@@ -11,5 +10,5 @@ interface ApiClient {
     @POST("auth/signin")
     suspend fun auth(
         @Body respon: AuthRequest
-    ): Resource<AuthResponse>
+    ): AuthResponse
 }

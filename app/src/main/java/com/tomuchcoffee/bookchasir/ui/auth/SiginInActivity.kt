@@ -16,6 +16,7 @@ import com.tomuchcoffee.bookchasir.util.hide
 import com.tomuchcoffee.bookchasir.util.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
+import kotlin.math.log
 
 val siginInModule = module {
     factory { SiginInActivity() }
@@ -32,8 +33,9 @@ class SiginInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(ActivitySiginInBinding.inflate(layoutInflater).also { binding = it }.root)
 
-        setView()
+
         dataOvserver()
+        setView()
 
     }
 
@@ -45,32 +47,43 @@ class SiginInActivity : AppCompatActivity() {
                     tvPassword.text.toString()
                 )
             )
+
+            val intent = Intent(this@SiginInActivity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
     private fun dataOvserver() {
-        viewModel.authMV.observe(this) {
-            when (it.status) {
-                Resource.Status.SUCCESS -> {
-                    prefren.setPref(Constant.TOKEN, it.data?.data?.token.orEmpty())
-                    binding.progressBar.hide()
-
-                    val intent = Intent(this,MainActivity::class.java)
-                    startActivity(intent)
-
-                    Log.d(TAG, "dataOvserver: " + it.data?.data)
-                }
-
-                Resource.Status.LOADING -> {
-                    binding.progressBar.show()
-                }
-                Resource.Status.ERROR -> {
-                    binding.progressBar.hide()
-                    Toast.makeText(applicationContext, "Ups Try Again Or check your Connection", 3)
-                        .show()
-                }
-
-            }
+        viewModel._authMV.observe(this){
+            prefren.setPref(Constant.TOKEN, it.data?.token.toString())
+            Log.d(TAG, "dataOvserver: " +it.data?.token.toString())
         }
     }
+
+//    private fun dataOvserver() {
+//        viewModel.authMV.observe(this) {
+//            when (it.status) {
+//                Resource.Status.SUCCESS -> {
+//                    Log.d(TAG, "dataOvserver: " + it.data?.data)
+//                    prefren.setPref(Constant.TOKEN, it.data?.data?.token.orEmpty())
+//                    binding.progressBar.hide()
+//
+//                    val intent = Intent(this,MainActivity::class.java)
+//                    startActivity(intent)
+//
+//
+//                }
+//
+//                Resource.Status.LOADING -> {
+//                    binding.progressBar.show()
+//                }
+//                Resource.Status.ERROR -> {
+//                    binding.progressBar.hide()
+//                    Toast.makeText(applicationContext, "Ups Try Again Or check your Connection", 3)
+//                        .show()
+//                }
+//
+//            }
+//        }
+//    }
 }
