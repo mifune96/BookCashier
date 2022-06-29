@@ -3,6 +3,7 @@ package com.tomuchcoffee.bookchasir.source.network
 import com.tomuchcoffee.bookchasir.source.model.Resource
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthResponse
+import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -10,16 +11,18 @@ val repositoryModule = module {
 }
 
 class BookChasirRepository(
-    private val api: ApiClient,
-//    private var prefren: SharePrefren
+    private val api: ApiClient
 
 ) {
     suspend fun Sigin(
         auth: AuthRequest
     ): AuthResponse {
-//        val res = api.auth(auth)
-//        prefren.setPref(Constant.TOKEN, res.data?.token.toString())
         return api.auth(auth)
+    }
+
+    suspend fun GetAllProduct(
+    ): ProductResponse{
+        return api.getProductAll()
     }
 
 

@@ -6,6 +6,9 @@ import com.tomuchcoffee.bookchasir.source.network.networkModule
 import com.tomuchcoffee.bookchasir.source.network.repositoryModule
 import com.tomuchcoffee.bookchasir.ui.auth.siginInModule
 import com.tomuchcoffee.bookchasir.ui.auth.siginViewModel
+import com.tomuchcoffee.bookchasir.ui.home.HomeViewModel
+import com.tomuchcoffee.bookchasir.ui.home.homeModule
+import com.tomuchcoffee.bookchasir.ui.home.homeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -27,7 +30,9 @@ class BookChasirApp : Application() {
                 networkModule,
                 repositoryModule,
                 siginViewModel,
-                siginInModule
+                siginInModule,
+                homeViewModel,
+                homeModule
             )
 
         }

@@ -4,19 +4,14 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tomuchcoffee.bookchasir.databinding.ActivitySiginInBinding
-import com.tomuchcoffee.bookchasir.source.model.Resource
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.ui.home.MainActivity
 import com.tomuchcoffee.bookchasir.util.Constant
 import com.tomuchcoffee.bookchasir.util.SharePrefren
-import com.tomuchcoffee.bookchasir.util.hide
-import com.tomuchcoffee.bookchasir.util.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
-import kotlin.math.log
 
 val siginInModule = module {
     factory { SiginInActivity() }
