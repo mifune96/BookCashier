@@ -1,13 +1,13 @@
 package com.tomuchcoffee.bookchasir.source.model.auth
 
-import java.io.Serializable
+import com.google.gson.annotations.SerializedName
 
 data class AuthResponse(
-    val email: String,
-    val password: String,
-    val data: List<DataModel>,
+    @SerializedName("data")
+    val `data`: Data? = Data()
 )
 
-data class DataModel(
-    val token: String?
-) : Serializable
+data class Data(
+    @SerializedName("token")
+    var token: String? = ""
+)
