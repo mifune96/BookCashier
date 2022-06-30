@@ -1,8 +1,10 @@
 package com.tomuchcoffee.bookchasir.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tomuchcoffee.bookchasir.source.model.product.ProductModel
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
 import com.tomuchcoffee.bookchasir.source.network.BookChasirRepository
 import kotlinx.coroutines.launch
@@ -16,13 +18,24 @@ class HomeViewModel(
     val repository: BookChasirRepository
 ) : ViewModel() {
 
-    val products by lazy { MutableLiveData<ProductResponse>() }
+    val products by lazy { MutableLiveData<ProductModel>() }
+    val message by lazy { MutableLiveData<String>() }
+
+    init {
+        message.value = null
+    }
+
 
     fun getProducts(){
-        viewModelScope.launch {
-            val data  = repository.GetAllProduct()
-            products.value = data
+        try {
+            viewModelScope.launch {
+                val data  = repository.GetAllProduct()
+                products.value = data
+            }
+        }catch (e: Exception){
+            message.value = "Terjadi Kesalahan"
         }
+
     }
 
 }

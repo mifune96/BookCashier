@@ -9,6 +9,7 @@ import com.tomuchcoffee.bookchasir.databinding.ActivitySiginInBinding
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.ui.home.MainActivity
 import com.tomuchcoffee.bookchasir.util.Constant
+import com.tomuchcoffee.bookchasir.util.PrefCanggi
 import com.tomuchcoffee.bookchasir.util.SharePrefren
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
@@ -22,7 +23,7 @@ class SiginInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySiginInBinding
     private val viewModel: SigInViewModel by viewModel()
 
-    private val prefren by lazy { SharePrefren(this) }
+//    private val prefren by lazy { SharePrefren(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +39,9 @@ class SiginInActivity : AppCompatActivity() {
         btnSignIn.setOnClickListener {
             viewModel.login(
                 AuthRequest(
-                    tvEmail.text.toString(),
-                    tvPassword.text.toString()
+//                    tvEmail.text.toString(),
+//                    tvPassword.text.toString()
+                "admin@gmail.com","rahasia"
                 )
             )
 
@@ -50,8 +52,9 @@ class SiginInActivity : AppCompatActivity() {
 
     private fun dataOvserver() {
         viewModel._authMV.observe(this){
-            prefren.setPref(Constant.TOKEN, it.data?.token.toString())
-            Log.d(TAG, "dataOvserver: " +it.data?.token.toString())
+//            PrefCanggi.token = it.data?.token.toString()
+//            prefren.setPref(Constant.TOKEN, it.data?.token.toString())
+//            Log.d(TAG, "dataOvserver: " +PrefCanggi.token)
         }
     }
 

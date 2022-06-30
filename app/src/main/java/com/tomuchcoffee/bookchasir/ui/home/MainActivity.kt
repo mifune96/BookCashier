@@ -9,6 +9,7 @@ import androidx.fragment.app.replace
 import com.tomuchcoffee.bookchasir.R
 import com.tomuchcoffee.bookchasir.databinding.ActivityMainBinding
 import com.tomuchcoffee.bookchasir.util.Constant
+import com.tomuchcoffee.bookchasir.util.PrefCanggi
 import com.tomuchcoffee.bookchasir.util.SharePrefren
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        Log.d(TAG, "isi pref: "+prefren.getString(Constant.TOKEN))
+//        Log.d(TAG, "isi pref: "+PrefCanggi.token)
 
 
     }

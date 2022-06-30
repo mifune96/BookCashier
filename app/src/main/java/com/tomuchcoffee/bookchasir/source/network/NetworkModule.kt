@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 val networkModule = module{
     single { provideOkhtppClient() }
@@ -14,11 +15,16 @@ val networkModule = module{
     single { provideBookChasirApi(get()) }
 }
 
+private val authInterceptor = AuthInterceptor()
+
 fun provideOkhtppClient(): OkHttpClient{
     return OkHttpClient.Builder()
         .addInterceptor(
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        ).build()
+        )
+        .addInterceptor(authInterceptor)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .build()
 }
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit{

@@ -12,5 +12,6 @@
     <color name="softcolorparent">#B6B2FF</color>
     <color name="greeenmantis">#00D293</color>
     <color name="grey">#B5B5B5</color>
+    <color name="greymuda">#F6F6F6</color>
     <color name="red">#FF0000</color>
 </resources>

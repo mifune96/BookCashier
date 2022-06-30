@@ -20,9 +20,11 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", 'BASE_URL', '"https://api-book-cashier.herokuapp.com/api/v1/"')
+            buildConfigField("String", 'BASE_URL_IMG', '"https://api-book-cashier.herokuapp.com"')
         }
         release {
             buildConfigField("String", 'BASE_URL', '"https://api-book-cashier.herokuapp.com/api/v1/"')
+            buildConfigField("String", 'BASE_URL_IMG', '"https://api-book-cashier.herokuapp.com"')
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

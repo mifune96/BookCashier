@@ -3,6 +3,7 @@ package com.tomuchcoffee.bookchasir.source.network
 import com.tomuchcoffee.bookchasir.source.model.Resource
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthResponse
+import com.tomuchcoffee.bookchasir.source.model.product.ProductModel
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
 import org.koin.dsl.module
 
@@ -21,7 +22,7 @@ class BookChasirRepository(
     }
 
     suspend fun GetAllProduct(
-    ): ProductResponse{
+    ): ProductModel{
         return api.getProductAll()
     }
 
