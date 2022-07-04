@@ -17,5 +17,5 @@ interface ApiClient {
 
     @GET("products?limit=10")
     suspend fun getProductAll(
-    ): ProductModel
+    ): ProductResponse
 }

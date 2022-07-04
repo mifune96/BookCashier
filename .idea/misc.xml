@@ -14,7 +14,9 @@
         <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/fragment_home.xml" value="0.26138458251953123" />
         <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/fragment_transaction.xml" value="0.1809957885742188" />
         <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/producr_transaction_item.xml" value="0.29375" />
-        <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/product_item.xml" value="0.29375" />
+        <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/product_checkout_item.xml" value="0.335" />
+        <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/product_item.xml" value="0.165" />
+        <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/product_transaction_item.xml" value="0.20052083333333334" />
         <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/signin.xml" value="0.14010416666666667" />
         <entry key="../../Dicoding/BookChasir/app/src/main/res/layout/transaction_item.xml" value="0.3220108032226563" />
         <entry key="../../Dicoding/BookChasir/app/src/main/res/menu/navigation_rail_menu.xml" value="0.1390625" />

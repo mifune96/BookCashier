@@ -1,32 +1,32 @@
 package com.tomuchcoffee.bookchasir.ui.home
 
 import android.content.ContentValues.TAG
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import com.tomuchcoffee.bookchasir.R
 import com.tomuchcoffee.bookchasir.databinding.ActivityMainBinding
-import com.tomuchcoffee.bookchasir.util.Constant
-import com.tomuchcoffee.bookchasir.util.PrefCanggi
-import com.tomuchcoffee.bookchasir.util.SharePrefren
+import com.tomuchcoffee.bookchasir.source.local.Datasharedpreferences
+import com.tomuchcoffee.bookchasir.ui.auth.SigInViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.dsl.module
+
+val mainInModule = module {
+    factory { MainActivity() }
+}
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var prefren: SharePrefren
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: SigInViewModel by viewModel()
+
 
     private val fragmentHome = HomeFragment()
-//    private val fragmentTransaction = Transaction()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ActivityMainBinding.inflate(layoutInflater).also { binding = it }.root)
-
-
-
-        prefren = SharePrefren(this)
 
         replaceFragment(fragmentHome)
         binding.apply {
@@ -38,9 +38,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val man = Datasharedpreferences.get.token
 
 
-//        Log.d(TAG, "isi pref: "+PrefCanggi.token)
+
+        Log.d(TAG, "isi pref: "+man)
 
 
     }

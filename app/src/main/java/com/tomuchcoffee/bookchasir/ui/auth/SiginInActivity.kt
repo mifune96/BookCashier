@@ -1,16 +1,12 @@
 package com.tomuchcoffee.bookchasir.ui.auth
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.tomuchcoffee.bookchasir.databinding.ActivitySiginInBinding
+import com.tomuchcoffee.bookchasir.source.local.Datasharedpreferences
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.ui.home.MainActivity
-import com.tomuchcoffee.bookchasir.util.Constant
-import com.tomuchcoffee.bookchasir.util.PrefCanggi
-import com.tomuchcoffee.bookchasir.util.SharePrefren
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
 
@@ -23,15 +19,14 @@ class SiginInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySiginInBinding
     private val viewModel: SigInViewModel by viewModel()
 
-//    private val prefren by lazy { SharePrefren(this) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ActivitySiginInBinding.inflate(layoutInflater).also { binding = it }.root)
 
 
-        dataOvserver()
+
         setView()
+
 
     }
 
@@ -41,47 +36,23 @@ class SiginInActivity : AppCompatActivity() {
                 AuthRequest(
 //                    tvEmail.text.toString(),
 //                    tvPassword.text.toString()
-                "admin@gmail.com","rahasia"
-                )
-            )
+                    "admin@gmail.com", "rahasia"
 
-            val intent = Intent(this@SiginInActivity, MainActivity::class.java)
-            startActivity(intent)
+                )
+
+
+            )
+            dataOvserver()
+
         }
     }
 
     private fun dataOvserver() {
-        viewModel._authMV.observe(this){
-//            PrefCanggi.token = it.data?.token.toString()
-//            prefren.setPref(Constant.TOKEN, it.data?.token.toString())
-//            Log.d(TAG, "dataOvserver: " +PrefCanggi.token)
+        viewModel._authMV.observe(this) {
+            Datasharedpreferences.get.token = it.data?.token.orEmpty()
+            val intent = Intent(this@SiginInActivity, MainActivity::class.java)
+            startActivity(intent)
         }
-    }
 
-//    private fun dataOvserver() {
-//        viewModel.authMV.observe(this) {
-//            when (it.status) {
-//                Resource.Status.SUCCESS -> {
-//                    Log.d(TAG, "dataOvserver: " + it.data?.data)
-//                    prefren.setPref(Constant.TOKEN, it.data?.data?.token.orEmpty())
-//                    binding.progressBar.hide()
-//
-//                    val intent = Intent(this,MainActivity::class.java)
-//                    startActivity(intent)
-//
-//
-//                }
-//
-//                Resource.Status.LOADING -> {
-//                    binding.progressBar.show()
-//                }
-//                Resource.Status.ERROR -> {
-//                    binding.progressBar.hide()
-//                    Toast.makeText(applicationContext, "Ups Try Again Or check your Connection", 3)
-//                        .show()
-//                }
-//
-//            }
-//        }
-//    }
+    }
 }

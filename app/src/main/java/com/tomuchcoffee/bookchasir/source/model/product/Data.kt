@@ -3,6 +3,8 @@ package com.tomuchcoffee.bookchasir.source.model.product
 
 import com.google.gson.annotations.SerializedName
 
+
+
 data class Data(
     @SerializedName("auhtor")
     val auhtor: String? = "",

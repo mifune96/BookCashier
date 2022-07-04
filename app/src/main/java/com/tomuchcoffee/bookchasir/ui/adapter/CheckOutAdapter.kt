@@ -6,28 +6,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tomuchcoffee.bookchasir.BuildConfig
 import com.tomuchcoffee.bookchasir.R
+import com.tomuchcoffee.bookchasir.databinding.ProductCheckoutItemBinding
 import com.tomuchcoffee.bookchasir.databinding.ProductItemBinding
 import com.tomuchcoffee.bookchasir.source.model.product.Products
 import com.tomuchcoffee.bookchasir.util.ConvertDateFormat
 
-class ProductAdapterOld(
+class CheckOutAdapter(
     val products: ArrayList<Products>,
     val listener: OnAdapterListener
-): RecyclerView.Adapter<ProductAdapterOld.ViewHolder>() {
+): RecyclerView.Adapter<CheckOutAdapter.ViewHolder>() {
 
     companion object{
 
     }
 
-    class ViewHolder(val binding: ProductItemBinding): RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(val binding: ProductCheckoutItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(product: Products){
 
-            binding.tvAutor.setText(product.auhtor)
-            binding.tvHargaprodukitem.setText(product.price.toString())
+            binding.tvHargaitemchekout.setText(product.price.toString())
             binding.tvJudulproduk.setText(product.title)
-            binding.tvStok.setText(product.stock.toString())
-            binding.tvPublishdate.setText(ConvertDateFormat().dateFormat(product.published.toString()))
-            binding.tvAutor.setText(product.auhtor)
+            binding.tvStokchekoutitem.setText(product.stock.toString())
+            binding.tvJumlahitemorder.setText(product.productbuyqty.toString())
 
             Glide.with(binding.root)
                 .load(BuildConfig.BASE_URL_IMG+ product.cover)
@@ -43,7 +42,7 @@ class ProductAdapterOld(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        ProductItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        ProductCheckoutItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
     )
 
     override fun getItemCount() = products.size
