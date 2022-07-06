@@ -23,17 +23,7 @@ class CheckOutAdapter(
     class ViewHolder(val binding: ProductCheckoutItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(product: Products){
 
-            binding.tvHargaitemchekout.setText(product.price.toString())
-            binding.tvJudulproduk.setText(product.title)
-            binding.tvStokchekoutitem.setText(product.stock.toString())
-            binding.tvJumlahitemorder.setText(product.productbuyqty.toString())
 
-            Glide.with(binding.root)
-                .load(BuildConfig.BASE_URL_IMG+ product.cover)
-                .override(150, 200)
-                .centerCrop()
-                .error(R.drawable.sampelproduk)
-                .into(binding.ivProduk)
         }
     }
 
@@ -50,14 +40,13 @@ class CheckOutAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val produk  = products[position]
         holder.bind(produk)
-        holder.itemView.setOnClickListener {
+        holder.binding.btnTambah.setOnClickListener {
             listener.onClick(produk)
         }
     }
 
     fun add(data: List<Products>){
         products.addAll(data)
-        notifyItemRangeInserted((products.size - data.size), data.size)
     }
 
     fun clear(){

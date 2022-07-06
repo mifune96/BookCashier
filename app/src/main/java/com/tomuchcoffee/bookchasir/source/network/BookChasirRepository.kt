@@ -1,5 +1,6 @@
 package com.tomuchcoffee.bookchasir.source.network
 
+import androidx.lifecycle.LiveData
 import com.tomuchcoffee.bookchasir.source.local.ProductDao
 import com.tomuchcoffee.bookchasir.source.model.Resource
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
@@ -29,6 +30,9 @@ class BookChasirRepository(
         return api.getProductAll()
     }
 
+    val readAllDataProductDao: LiveData<List<Products>> = db.findAll()
+
+
     suspend fun find(productModel: Products)= db.find(productModel.published)
 
     suspend fun save(productModel: Products){
@@ -37,6 +41,10 @@ class BookChasirRepository(
 
     suspend fun remove(productModel: Products){
         db.remove(productModel)
+    }
+
+    suspend fun update(productModel: Products){
+        db.update(productModel)
     }
 
 

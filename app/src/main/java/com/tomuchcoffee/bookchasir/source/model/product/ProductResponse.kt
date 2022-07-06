@@ -16,11 +16,11 @@ data class Products(
     val cover: String?,
     val createdAt: String?,
     val id: Int?,
-    val price: Double?,
+    val price: Double,
     @PrimaryKey(autoGenerate = false)
     val published: String,
     val sold: Int?,
-    val stock: Int?,
+    val stock: Int,
     val title: String?,
     val updatedAt: String?,
     val user: Int?,

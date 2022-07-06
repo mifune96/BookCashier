@@ -12,10 +12,11 @@ interface ProductDao {
     @Query("SELECT COUNT(*) FROM tableProduk WHERE published=:publish")
     suspend fun find(publish: String) : Int
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun save(productModel: Products)
 
     @Update
+    suspend fun update(productModel: Products)
 
     @Delete
     suspend fun remove(productModel: Products)

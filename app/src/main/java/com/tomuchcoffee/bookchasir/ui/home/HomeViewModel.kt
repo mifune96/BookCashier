@@ -1,5 +1,6 @@
 package com.tomuchcoffee.bookchasir.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,14 +19,16 @@ class HomeViewModel(
 ) : ViewModel() {
 
     val products by lazy { MutableLiveData<ProductResponse>() }
-    val produk by lazy { MutableLiveData<Products>() }
     val message by lazy { MutableLiveData<String>() }
-    val isClick by lazy { MutableLiveData<Int>(0) }
+
+    val readAllCheckout: LiveData<List<Products>>
 
     val produkdb = repository.db.findAll()
 
     init {
         message.value = null
+
+        readAllCheckout = repository.readAllDataProductDao
     }
 
 
@@ -43,15 +46,19 @@ class HomeViewModel(
 
     fun find(products: Products) {
         viewModelScope.launch {
-          repository.find(products)
+            repository.find(products)
         }
     }
 
-    fun clickProduct(products: Products) {
+    fun insertData(products: Products) {
         viewModelScope.launch {
-
             repository.save(products)
+        }
+    }
 
+    fun update(products: Products) {
+        viewModelScope.launch {
+            repository.update(products)
         }
     }
 

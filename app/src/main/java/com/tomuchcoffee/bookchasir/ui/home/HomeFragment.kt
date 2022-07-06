@@ -9,8 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tomuchcoffee.bookchasir.databinding.FragmentHomeBinding
+import com.tomuchcoffee.bookchasir.source.local.ProductDao
 import com.tomuchcoffee.bookchasir.source.model.product.Products
+import com.tomuchcoffee.bookchasir.ui.adapter.AdapterCheckout
 import com.tomuchcoffee.bookchasir.ui.adapter.CheckOutAdapter
 import com.tomuchcoffee.bookchasir.ui.adapter.ProductAdapterOld
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,13 +46,15 @@ class HomeFragment : Fragment() {
         setView()
 
 
-
     }
 
 
     private fun setView() {
         viewModel.getProducts()
         binding.rvProduk.adapter = productAdapter
+        val adapterCheckout = AdapterCheckout(viewModel)
+        binding.rvItemcheckout.adapter = adapterCheckout
+        binding.rvItemcheckout.layoutManager = LinearLayoutManager(activity)
 
         viewModel.products.observe(viewLifecycleOwner, {
             productAdapter.clear()
@@ -55,37 +62,39 @@ class HomeFragment : Fragment() {
             it.data.let { it1 -> productAdapter.add(it1) }
         })
 
-        binding.rvItemcheckout.adapter = checkOutAdapter
 
-        viewModel.produkdb.observe(viewLifecycleOwner,{
-            checkOutAdapter.clear()
-            checkOutAdapter.add(it)
-
+        viewModel.readAllCheckout.observe(viewLifecycleOwner,{
+            adapterCheckout.setData(it)
         })
 
 
 
+
+
+//        binding.rvItemcheckout.adapter = checkOutAdapter
+//        viewModel.produkdb.observe(viewLifecycleOwner, {
+//            checkOutAdapter.clear()
+//            checkOutAdapter.add(it)
+//        })
+
+
     }
 
-    private val checkOutAdapter by lazy {
-        CheckOutAdapter(arrayListOf(), object : CheckOutAdapter.OnAdapterListener{
-            override fun onClick(product: Products) {
-            }
-
-        })
-    }
+//    private val checkOutAdapter by lazy {
+//        CheckOutAdapter(arrayListOf(), object : CheckOutAdapter.OnAdapterListener {
+//            override fun onClick(product: Products) {
+//            }
+//
+//        })
+//    }
 
 
     private val productAdapter by lazy {
         ProductAdapterOld(arrayListOf(), object : ProductAdapterOld.OnAdapterListener {
             override fun onClick(product: Products) {
-                if(product == null){
-                    viewModel.clickProduct(product)
-                } else product.productbuyqty+=1
+                product.productbuyqty+=1
+                viewModel.insertData(product)
 
-                Log.d(TAG, "produknya: "+ viewModel.clickProduct(product))
-//                startActivity(Intent(requireActivity(), SiginInActivity::class.java))
-                Toast.makeText(requireActivity(), "Yey Berhasil clik", Toast.LENGTH_SHORT)
             }
         })
     }
