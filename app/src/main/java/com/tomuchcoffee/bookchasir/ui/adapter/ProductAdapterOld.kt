@@ -1,5 +1,7 @@
 package com.tomuchcoffee.bookchasir.ui.adapter
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,55 +15,62 @@ import com.tomuchcoffee.bookchasir.util.ConvertDateFormat
 class ProductAdapterOld(
     val products: ArrayList<Products>,
     val listener: OnAdapterListener
-): RecyclerView.Adapter<ProductAdapterOld.ViewHolder>() {
+) : RecyclerView.Adapter<ProductAdapterOld.ViewHolder>() {
 
-    companion object{
+    companion object {
 
     }
 
-    class ViewHolder(val binding: ProductItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(product: Products){
-
-            binding.tvAutor.setText(product.auhtor)
-            binding.tvHargaprodukitem.setText(product.price.toString())
-            binding.tvJudulproduk.setText(product.title)
-            binding.tvStok.setText(product.stock.toString())
-            binding.tvPublishdate.setText(ConvertDateFormat().dateFormat(product.published.toString()))
-            binding.tvAutor.setText(product.auhtor)
-
-            Glide.with(binding.root)
-                .load(BuildConfig.BASE_URL_IMG+ product.cover)
-                .override(150, 200)
-                .centerCrop()
-                .error(R.drawable.sampelproduk)
-                .into(binding.ivProduk)
-        }
+    class ViewHolder(val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
     }
 
-    interface OnAdapterListener{
+    interface OnAdapterListener {
         fun onClick(product: Products)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        ProductItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun getItemCount() = products.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val produk  = products[position]
-        holder.bind(produk)
-        holder.itemView.setOnClickListener {
-            listener.onClick(produk)
+        val produk = products[position]
+        var jumlah = products[position].productbuyqty
+
+        with(holder) {
+
+            binding.tvAutor.text = produk.auhtor
+            binding.tvHargaprodukitem.text = produk.price.toString()
+            binding.tvJudulproduk.text = produk.title
+            binding.tvStok.text = produk.stock.toString()
+            binding.tvPublishdate.text = ConvertDateFormat().dateFormat(produk.createdAt)
+
+
+            Glide.with(binding.root)
+                .load(BuildConfig.BASE_URL_IMG+ produk.cover)
+                .override(150, 200)
+                .centerCrop()
+                .error(R.drawable.sampelproduk)
+                .into(binding.ivProduk)
+            binding.itemProduct.setOnClickListener {
+//                jumlah=1
+//                produk.productbuyqty = jumlah
+                listener.onClick(produk)
+
+                Log.d(TAG, "onBindViewHolder: "+produk.productbuyqty)
+
+            }
         }
+
     }
 
-    fun add(data: List<Products>){
+    fun add(data: List<Products>) {
         products.addAll(data)
         notifyItemRangeInserted((products.size - data.size), data.size)
     }
 
-    fun clear(){
+    fun clear() {
         products.clear()
         notifyDataSetChanged()
     }

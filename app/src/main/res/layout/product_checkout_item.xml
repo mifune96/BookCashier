@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="5dp"
-                    android:layout_toStartOf="@+id/tv_deletitemchekout"
+                    android:layout_toStartOf="@+id/btn_deletitemchekout"
                     android:fontFamily="@font/poppins_bold"
                     android:maxLines="2"
                     android:text="@string/faktor_latters"
@@ -49,7 +49,7 @@
 
 
                 <ImageView
-                    android:id="@+id/tv_deletitemchekout"
+                    android:id="@+id/btn_deletitemchekout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

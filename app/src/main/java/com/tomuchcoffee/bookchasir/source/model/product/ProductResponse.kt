@@ -24,8 +24,9 @@ data class Products(
     val title: String?,
     val updatedAt: String?,
     val user: Int?,
+
     val totalpayment : Int?,
     val totalproductbuy: Int?,
-    var productbuyqty: Int,
+    var productbuyqty: Int=0,
 
     ): Serializable

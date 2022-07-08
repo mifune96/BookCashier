@@ -21,14 +21,10 @@ class HomeViewModel(
     val products by lazy { MutableLiveData<ProductResponse>() }
     val message by lazy { MutableLiveData<String>() }
 
-    val readAllCheckout: LiveData<List<Products>>
-
-    val produkdb = repository.db.findAll()
 
     init {
         message.value = null
 
-        readAllCheckout = repository.readAllDataProductDao
     }
 
 
@@ -43,6 +39,8 @@ class HomeViewModel(
         }
 
     }
+
+    val showAllDao = repository.db.findAll()
 
     fun find(products: Products) {
         viewModelScope.launch {
@@ -59,6 +57,12 @@ class HomeViewModel(
     fun update(products: Products) {
         viewModelScope.launch {
             repository.update(products)
+        }
+    }
+
+    fun delet(products: Products){
+        viewModelScope.launch {
+            repository.remove(products)
         }
     }
 

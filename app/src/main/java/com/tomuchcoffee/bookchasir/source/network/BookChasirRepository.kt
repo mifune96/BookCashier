@@ -2,10 +2,8 @@ package com.tomuchcoffee.bookchasir.source.network
 
 import androidx.lifecycle.LiveData
 import com.tomuchcoffee.bookchasir.source.local.ProductDao
-import com.tomuchcoffee.bookchasir.source.model.Resource
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthResponse
-import com.tomuchcoffee.bookchasir.source.model.product.ProductModel
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
 import com.tomuchcoffee.bookchasir.source.model.product.Products
 import org.koin.dsl.module
@@ -29,8 +27,6 @@ class BookChasirRepository(
     ): ProductResponse{
         return api.getProductAll()
     }
-
-    val readAllDataProductDao: LiveData<List<Products>> = db.findAll()
 
 
     suspend fun find(productModel: Products)= db.find(productModel.published)

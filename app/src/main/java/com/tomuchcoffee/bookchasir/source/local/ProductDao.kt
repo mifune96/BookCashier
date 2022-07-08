@@ -2,6 +2,7 @@ package com.tomuchcoffee.bookchasir.source.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.tomuchcoffee.bookchasir.source.model.product.Products
 
 @Dao
@@ -12,7 +13,7 @@ interface ProductDao {
     @Query("SELECT COUNT(*) FROM tableProduk WHERE published=:publish")
     suspend fun find(publish: String) : Int
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = REPLACE)
     suspend fun save(productModel: Products)
 
     @Update
