@@ -11,13 +11,14 @@ data class ProductResponse(
 
 @Entity(tableName = "tableProduk")
 data class Products(
+    @PrimaryKey(autoGenerate = true)
+    val idProducts: Int = 0,
     val auhtor: String?,
     val category: Int?,
     val cover: String?,
     val createdAt: String?,
     val id: Int?,
     val price: Double,
-    @PrimaryKey(autoGenerate = false)
     val published: String,
     val sold: Int?,
     val stock: Int,
@@ -27,6 +28,6 @@ data class Products(
 
     val totalpayment : Int?,
     val totalproductbuy: Int?,
-    var productbuyqty: Int=0,
+    var productbuyqty: Int=1,
 
     ): Serializable

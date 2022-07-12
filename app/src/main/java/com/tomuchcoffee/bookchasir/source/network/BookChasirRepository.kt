@@ -1,5 +1,7 @@
 package com.tomuchcoffee.bookchasir.source.network
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.tomuchcoffee.bookchasir.source.local.ProductDao
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
@@ -17,6 +19,7 @@ class BookChasirRepository(
     val db : ProductDao
 
 ) {
+
     suspend fun Sigin(
         auth: AuthRequest
     ): AuthResponse {
@@ -41,6 +44,26 @@ class BookChasirRepository(
 
     suspend fun update(productModel: Products){
         db.update(productModel)
+    }
+
+    suspend fun deleteAllDao(){
+        db.deletAllProduck()
+    }
+
+    suspend fun incrementQty(productModel: Products){
+        val producNow = productModel.id?.let { db.getOneProduct(it) }
+        Log.d(TAG, "incrementQty: "+ producNow)
+        Log.d(TAG, "produk id: "+ productModel)
+        if (producNow != null){
+            producNow.productbuyqty +=1
+//            producNow.productbuyqty++
+            db.update(producNow)
+        } else{
+            productModel.productbuyqty =1
+            db.save(productModel)
+        }
+
+
     }
 
 

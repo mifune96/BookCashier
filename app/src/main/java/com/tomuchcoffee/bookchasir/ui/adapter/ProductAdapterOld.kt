@@ -17,9 +17,6 @@ class ProductAdapterOld(
     val listener: OnAdapterListener
 ) : RecyclerView.Adapter<ProductAdapterOld.ViewHolder>() {
 
-    companion object {
-
-    }
 
     class ViewHolder(val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
     }
@@ -36,16 +33,12 @@ class ProductAdapterOld(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val produk = products[position]
-        var jumlah = products[position].productbuyqty
-
         with(holder) {
-
             binding.tvAutor.text = produk.auhtor
             binding.tvHargaprodukitem.text = produk.price.toString()
             binding.tvJudulproduk.text = produk.title
             binding.tvStok.text = produk.stock.toString()
             binding.tvPublishdate.text = ConvertDateFormat().dateFormat(produk.createdAt)
-
 
             Glide.with(binding.root)
                 .load(BuildConfig.BASE_URL_IMG+ produk.cover)
@@ -54,11 +47,8 @@ class ProductAdapterOld(
                 .error(R.drawable.sampelproduk)
                 .into(binding.ivProduk)
             binding.itemProduct.setOnClickListener {
-//                jumlah=1
-//                produk.productbuyqty = jumlah
-                listener.onClick(produk)
 
-                Log.d(TAG, "onBindViewHolder: "+produk.productbuyqty)
+                listener.onClick(produk)
 
             }
         }

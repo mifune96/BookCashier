@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tomuchcoffee.bookchasir.BuildConfig
@@ -13,10 +14,9 @@ import com.tomuchcoffee.bookchasir.source.model.product.Products
 import com.tomuchcoffee.bookchasir.util.ProductConverter
 
 class CheckOutAdapter(
-    val products: ArrayList<Products>,
+    val products: ArrayList<Products>  ,
     val listener: OnAdapterListener
 ) : RecyclerView.Adapter<CheckOutAdapter.ViewHolder>() {
-
 
     class ViewHolder(val binding: ProductCheckoutItemBinding) :
         RecyclerView.ViewHolder(binding.root) {}
@@ -44,7 +44,6 @@ class CheckOutAdapter(
             binding.tvJudulproduk.text = produk.title
             binding.tvStokchekoutitem.text = produk.stock.toString()
             binding.tvJumlahitemorder.text = jumlah.toString()
-
 
             binding.btnTambah.setOnClickListener {
                 jumlah++
@@ -85,11 +84,14 @@ class CheckOutAdapter(
     }
 
     fun add(data: List<Products>) {
+        val diffUtil = MyDiffUtil(products, data)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
         products.addAll(data)
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    fun clear() {
-        products.clear()
-        notifyDataSetChanged()
-    }
+//    fun clear() {
+//        products.clear()
+//        notifyDataSetChanged()
+//    }
 }

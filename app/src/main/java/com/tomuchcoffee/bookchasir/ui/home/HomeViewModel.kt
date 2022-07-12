@@ -1,6 +1,5 @@
 package com.tomuchcoffee.bookchasir.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,7 +23,6 @@ class HomeViewModel(
 
     init {
         message.value = null
-
     }
 
 
@@ -42,17 +40,6 @@ class HomeViewModel(
 
     val showAllDao = repository.db.findAll()
 
-    fun find(products: Products) {
-        viewModelScope.launch {
-            repository.find(products)
-        }
-    }
-
-    fun insertData(products: Products) {
-        viewModelScope.launch {
-            repository.save(products)
-        }
-    }
 
     fun update(products: Products) {
         viewModelScope.launch {
@@ -63,6 +50,18 @@ class HomeViewModel(
     fun delet(products: Products){
         viewModelScope.launch {
             repository.remove(products)
+        }
+    }
+
+    fun incremenQty(products: Products){
+        viewModelScope.launch {
+            repository.incrementQty(products)
+        }
+    }
+
+    fun deletAllProductDao(){
+        viewModelScope.launch {
+            repository.deleteAllDao()
         }
     }
 
