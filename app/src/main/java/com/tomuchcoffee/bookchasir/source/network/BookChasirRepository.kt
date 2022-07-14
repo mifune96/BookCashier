@@ -2,10 +2,12 @@ package com.tomuchcoffee.bookchasir.source.network
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.tomuchcoffee.bookchasir.source.local.ProductDao
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthResponse
+import com.tomuchcoffee.bookchasir.source.model.checkout.CheckOutResponse
+import com.tomuchcoffee.bookchasir.source.model.checkout.Payload
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
 import com.tomuchcoffee.bookchasir.source.model.product.Products
 import org.koin.dsl.module
@@ -31,12 +33,14 @@ class BookChasirRepository(
         return api.getProductAll()
     }
 
+    suspend fun postCheckout(
+       checkOutResponse: CheckOutResponse
+    ): CheckOutResponse{
+        return api.checkout(checkOutResponse)
+    }
+
 
     suspend fun find(productModel: Products)= db.find(productModel.published)
-
-    suspend fun save(productModel: Products){
-        db.save(productModel)
-    }
 
     suspend fun remove(productModel: Products){
         db.remove(productModel)
@@ -65,6 +69,9 @@ class BookChasirRepository(
 
 
     }
+
+
+
 
 
 }

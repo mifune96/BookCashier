@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tomuchcoffee.bookchasir.databinding.FragmentHomeBinding
+import com.tomuchcoffee.bookchasir.source.model.checkout.CheckOutResponse
+import com.tomuchcoffee.bookchasir.source.model.checkout.Payload
 import com.tomuchcoffee.bookchasir.source.model.product.Products
-import com.tomuchcoffee.bookchasir.ui.adapter.CheckOutAdapter
 import com.tomuchcoffee.bookchasir.ui.adapter.ProductAdapterOld
 import com.tomuchcoffee.bookchasir.ui.adapter.ProductCheckoutAdapter
 import com.tomuchcoffee.bookchasir.util.ProductConverter
@@ -67,7 +68,6 @@ class HomeFragment : Fragment() {
 
         viewModel.showAllDao.observe(viewLifecycleOwner, {
             setupAdapter.submitList(it)
-//            setupAdapter.notifyDataSetChanged()
             Log.d(TAG, "isi dao: " + it)
             var countBuyPrice = 0.0
             var totalItem = 0
@@ -79,8 +79,6 @@ class HomeFragment : Fragment() {
             }
             binding.tvTotalPayment.text = ProductConverter.decimalFormat(countBuyPrice)
             binding.tvCheckoutItem.text = totalItem.toString()
-
-
         })
 
         binding.tvClearAll.setOnClickListener {
@@ -88,9 +86,26 @@ class HomeFragment : Fragment() {
         }
 
 
+        binding.btnChekout.setOnClickListener {
+            val asak = viewModel.showAllDao.value
+            val payload = asak!!.map { produk ->
+                Payload(
+                    productId = produk.id, quantity = produk.productbuyqty
+                )
+            }
+
+            val checkOutResponse = CheckOutResponse(
+                payload = payload
+            )
+
+            viewModel.postCheckOut(
+                checkOutResponse
+            )
+
+        }
+
+
     }
-
-
 
 
     private val productAdapter by lazy {
@@ -103,3 +118,4 @@ class HomeFragment : Fragment() {
     }
 
 }
+
