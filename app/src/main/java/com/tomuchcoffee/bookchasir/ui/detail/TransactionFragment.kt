@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tomuchcoffee.bookchasir.R
 import com.tomuchcoffee.bookchasir.databinding.FragmentTransactionBinding
+import com.tomuchcoffee.bookchasir.source.model.transaction.Data
 import com.tomuchcoffee.bookchasir.ui.adapter.TransactionAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
@@ -23,6 +24,7 @@ class TransactionFragment : Fragment(){
 
     private lateinit var binding: FragmentTransactionBinding
     private val viewModel: TransactionViewModel by viewModel()
+    private var data = ArrayList<Data>()
 
 
 
@@ -40,6 +42,8 @@ class TransactionFragment : Fragment(){
 
         setView()
 
+//        binding.edtSearch.setOnQ
+
 
         binding.edtSearch.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -51,33 +55,31 @@ class TransactionFragment : Fragment(){
             }
 
             override fun afterTextChanged(s: Editable?) {
-                filter(s.toString())
+               viewModel.keyword = s.toString()
+                viewModel.getTransaction()
             }
 
         })
 
     }
 
-    private fun filter(text: String) {
+    private val transactionAdapter by lazy {
+        TransactionAdapter(arrayListOf(),object : TransactionAdapter.onAdapterListener{
+            override fun onClick(data: Data) {
 
+            }
 
+        })
     }
 
     private fun setView() {
 
-        val transactionAdapter = TransactionAdapter(
-            onClickItemListener = { data ->
-
-
-            }
-        )
-
         binding.rvProduk.layoutManager = LinearLayoutManager(activity)
         binding.rvProduk.adapter = transactionAdapter
         viewModel.getTransaction()
-        viewModel.transactions.observe(viewLifecycleOwner,{ al->
-
-            transactionAdapter.submitList(al.data)
+        viewModel.transactions.observe(viewLifecycleOwner,{
+            transactionAdapter.clear()
+            it.data?.let { it1 -> transactionAdapter.addData(it1) }
         })
 
 
