@@ -10,15 +10,16 @@ import com.tomuchcoffee.bookchasir.source.model.checkout.CheckOutResponse
 import com.tomuchcoffee.bookchasir.source.model.checkout.Payload
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
 import com.tomuchcoffee.bookchasir.source.model.product.Products
+import com.tomuchcoffee.bookchasir.source.model.transaction.TransactionResponse
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory { BookChasirRepository(get(),get()) }
+    factory { BookChasirRepository(get(), get()) }
 }
 
 class BookChasirRepository(
     private val api: ApiClient,
-    val db : ProductDao
+    val db: ProductDao
 
 ) {
 
@@ -29,49 +30,52 @@ class BookChasirRepository(
     }
 
     suspend fun GetAllProduct(
-    ): ProductResponse{
+    ): ProductResponse {
         return api.getProductAll()
     }
 
     suspend fun postCheckout(
-       checkOutResponse: CheckOutResponse
-    ): CheckOutResponse{
+        checkOutResponse: CheckOutResponse
+    ): CheckOutResponse {
         return api.checkout(checkOutResponse)
     }
 
+    suspend fun getAllTransaction(
+        keyword: String
+    ): TransactionResponse {
+        return api.getAllTransaction(keyword)
+    }
 
-    suspend fun find(productModel: Products)= db.find(productModel.published)
 
-    suspend fun remove(productModel: Products){
+    suspend fun find(productModel: Products) = db.find(productModel.published)
+
+    suspend fun remove(productModel: Products) {
         db.remove(productModel)
     }
 
-    suspend fun update(productModel: Products){
+    suspend fun update(productModel: Products) {
         db.update(productModel)
     }
 
-    suspend fun deleteAllDao(){
+    suspend fun deleteAllDao() {
         db.deletAllProduck()
     }
 
-    suspend fun incrementQty(productModel: Products){
+    suspend fun incrementQty(productModel: Products) {
         val producNow = productModel.id?.let { db.getOneProduct(it) }
-        Log.d(TAG, "incrementQty: "+ producNow)
-        Log.d(TAG, "produk id: "+ productModel)
-        if (producNow != null){
-            producNow.productbuyqty +=1
+        Log.d(TAG, "incrementQty: " + producNow)
+        Log.d(TAG, "produk id: " + productModel)
+        if (producNow != null) {
+            producNow.productbuyqty += 1
 //            producNow.productbuyqty++
             db.update(producNow)
-        } else{
-            productModel.productbuyqty =1
+        } else {
+            productModel.productbuyqty = 1
             db.save(productModel)
         }
 
 
     }
-
-
-
 
 
 }

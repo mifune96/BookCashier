@@ -8,6 +8,8 @@ import com.tomuchcoffee.bookchasir.source.network.repositoryModule
 import com.tomuchcoffee.bookchasir.source.presistence.databaseModule
 import com.tomuchcoffee.bookchasir.ui.auth.siginInModule
 import com.tomuchcoffee.bookchasir.ui.auth.siginViewModel
+import com.tomuchcoffee.bookchasir.ui.detail.transactionModule
+import com.tomuchcoffee.bookchasir.ui.detail.transactionViewModel
 import com.tomuchcoffee.bookchasir.ui.home.homeModule
 import com.tomuchcoffee.bookchasir.ui.home.homeViewModel
 import com.tomuchcoffee.bookchasir.ui.home.mainInModule
@@ -37,7 +39,9 @@ class BookChasirApp : Application() {
                 homeViewModel,
                 homeModule,
                 mainInModule,
-                databaseModule
+                databaseModule,
+                transactionViewModel,
+                transactionModule
             )
 
         }

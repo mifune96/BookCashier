@@ -45,25 +45,6 @@ class HomeViewModel(
 
     }
 
-//    fun postCheckOut(productResponse: ProductResponse) {
-//        val checkOutResponse = CheckOutResponse(
-//            payload = productResponse.data.map { datas ->
-//                Payload(
-//                    productId = datas.id,
-//                    quantity = datas.productbuyqty
-//                )
-//            }
-//        )
-//        viewModelScope.launch {
-//            try {
-//
-//                Log.d(ContentValues.TAG, "Resource isinya: " + checkOutResponse)
-//            } catch (e: Exception) {
-//                message.value = "Terjadi Kesalahan"
-//            }
-//        }
-//
-//    }
 
     fun postCheckOut(checkOutResponse: CheckOutResponse){
         viewModelScope.launch {
@@ -71,6 +52,7 @@ class HomeViewModel(
             checkout.value = response
 
             deletAllProductDao()
+            getProducts()
         }
     }
 

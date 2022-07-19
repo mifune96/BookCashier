@@ -9,6 +9,7 @@ import com.tomuchcoffee.bookchasir.R
 import com.tomuchcoffee.bookchasir.databinding.ActivityMainBinding
 import com.tomuchcoffee.bookchasir.source.local.Datasharedpreferences
 import com.tomuchcoffee.bookchasir.ui.auth.SigInViewModel
+import com.tomuchcoffee.bookchasir.ui.detail.TransactionFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
 
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private val fragmentHome = HomeFragment()
+    private val fragmentTraction = TransactionFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +32,22 @@ class MainActivity : AppCompatActivity() {
 
         replaceFragment(fragmentHome)
         binding.apply {
-            navRail.setOnItemReselectedListener {
-                when(it.itemId){
-                    R.id.ic_card -> replaceFragment(fragmentHome)
+            navRail.setOnItemSelectedListener { menu->
+                when(menu.itemId){
+                    R.id.ic_card->{
+                        replaceFragment(fragmentHome)
+                        true
+                    }
+                    R.id.ic_transaksi->{
+                        replaceFragment(fragmentTraction)
+                        true
+                    }
 
+                    else-> false
                 }
             }
         }
 
-        val man = Datasharedpreferences.get.token
-
-
-
-        Log.d(TAG, "isi pref: "+man)
 
 
     }

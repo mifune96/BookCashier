@@ -5,9 +5,11 @@ import com.tomuchcoffee.bookchasir.source.model.auth.AuthResponse
 import com.tomuchcoffee.bookchasir.source.model.checkout.CheckOutResponse
 import com.tomuchcoffee.bookchasir.source.model.checkout.Payload
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
+import com.tomuchcoffee.bookchasir.source.model.transaction.TransactionResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiClient {
 
@@ -24,4 +26,11 @@ interface ApiClient {
     suspend fun checkout(
         @Body checkOutResponse: CheckOutResponse
     ): CheckOutResponse
+
+    @GET("transactions")
+    suspend fun getAllTransaction(
+        @Query("keyword") keyword: String
+    ): TransactionResponse
+
+
 }
