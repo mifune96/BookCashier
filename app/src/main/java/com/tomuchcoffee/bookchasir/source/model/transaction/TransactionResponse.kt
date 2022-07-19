@@ -19,23 +19,23 @@ data class TransactionResponse(
     val user: Int? = 0
 ) data class DetailTransaction(
     @SerializedName("auhtorProduct")
-    val auhtorProduct: String? = "",
+    val auhtorProduct: String = "",
     @SerializedName("coverImage")
-    val coverImage: String? = "",
+    val coverImage: String = "",
     @SerializedName("createdAt")
-    val createdAt: String? = "",
+    val createdAt: String = "",
     @SerializedName("id")
-    val id: Int? = 0,
+    val id: Int = 0,
     @SerializedName("priceProduct")
-    val priceProduct: Int? = 0,
+    val priceProduct: Int= 0,
     @SerializedName("productHistoryId")
-    val productHistoryId: Int? = 0,
+    val productHistoryId: Int = 0,
     @SerializedName("quantity")
-    val quantity: Int? = 0,
+    val quantity: Int = 0,
     @SerializedName("titleProduct")
-    val titleProduct: String? = "",
+    val titleProduct: String = "",
     @SerializedName("transaction")
-    val transaction: Int? = 0,
+    val transaction: Int = 0,
     @SerializedName("updatedAt")
-    val updatedAt: String? = ""
+    val updatedAt: String = ""
 )

@@ -1,15 +1,12 @@
 package com.tomuchcoffee.bookchasir.ui.home
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.tomuchcoffee.bookchasir.R
 import com.tomuchcoffee.bookchasir.databinding.ActivityMainBinding
-import com.tomuchcoffee.bookchasir.source.local.Datasharedpreferences
 import com.tomuchcoffee.bookchasir.ui.auth.SigInViewModel
-import com.tomuchcoffee.bookchasir.ui.detail.TransactionFragment
+import com.tomuchcoffee.bookchasir.ui.transaction.TransactionFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
 

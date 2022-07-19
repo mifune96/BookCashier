@@ -1,4 +1,4 @@
-package com.tomuchcoffee.bookchasir.ui.detail
+package com.tomuchcoffee.bookchasir.ui.transaction
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
