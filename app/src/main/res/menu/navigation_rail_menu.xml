@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/ic_card"
+        android:id="@+id/navigation_home"
         android:enabled="true"
         android:icon="@drawable/ic_cardactive"
         tools:ignore="MenuTitle" />
     <item
-        android:id="@+id/ic_transaksi"
+        android:id="@+id/navigation_transaction"
         android:enabled="true"
         android:icon="@drawable/ic_historyactive"
         tools:ignore="MenuTitle" />

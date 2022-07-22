@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tomuchcoffee.bookchasir.databinding.DetailTransactionItemBinding
 import com.tomuchcoffee.bookchasir.databinding.TransactionItemBinding
+import com.tomuchcoffee.bookchasir.source.model.transaction.Data
 import com.tomuchcoffee.bookchasir.source.model.transaction.DetailTransaction
 import com.tomuchcoffee.bookchasir.util.ConvertDateFormat
 import com.tomuchcoffee.bookchasir.util.ProductConverter
 
 class DialogTransactionDetailAdapter(
-    var dataList: ArrayList<DetailTransaction>
+    var dataList: ArrayList<Data>
 ) :
     RecyclerView.Adapter<DialogTransactionDetailAdapter.ViewHolder>() {
 
@@ -33,18 +34,18 @@ class DialogTransactionDetailAdapter(
 
 
             with(binding) {
-                val totalhargalist = transaction.priceProduct * transaction.quantity
-                tvNameitemDetailproduk.text = transaction.titleProduct
-                tvHargaItemDetailproduk.text = "$"+transaction.priceProduct.toString()
-                tvJumlahhargaTotalitem.text = totalhargalist.toString()
-                tvJumlahPeritemdetail.text = transaction.quantity.toString()
+//                val totalhargalist = transaction.priceProduct * transaction.quantity
+                tvNameitemDetailproduk.text = transaction.invoice
+                tvHargaItemDetailproduk.text = "$"+transaction.user
+                tvJumlahhargaTotalitem.text = transaction.invoice
+                tvJumlahPeritemdetail.text = transaction.invoice
             }
         }
     }
 
     override fun getItemCount() = dataList.size
 
-    fun addData(data: List<DetailTransaction>){
+    fun addData(data: List<Data>){
         dataList.addAll(data)
     }
 

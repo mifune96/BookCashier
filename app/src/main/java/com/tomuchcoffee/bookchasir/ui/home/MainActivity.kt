@@ -3,6 +3,8 @@ package com.tomuchcoffee.bookchasir.ui.home
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.tomuchcoffee.bookchasir.R
 import com.tomuchcoffee.bookchasir.databinding.ActivityMainBinding
 import com.tomuchcoffee.bookchasir.ui.auth.SigInViewModel
@@ -16,43 +18,17 @@ val mainInModule = module {
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: SigInViewModel by viewModel()
-
-
-    private val fragmentHome = HomeFragment()
-    private val fragmentTraction = TransactionFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(ActivityMainBinding.inflate(layoutInflater).also { binding = it }.root)
+        setContentView(binding.root)
 
-        replaceFragment(fragmentHome)
-        binding.apply {
-            navRail.setOnItemSelectedListener { menu->
-                when(menu.itemId){
-                    R.id.ic_card->{
-                        replaceFragment(fragmentHome)
-                        true
-                    }
-                    R.id.ic_transaksi->{
-                        replaceFragment(fragmentTraction)
-                        true
-                    }
-
-                    else-> false
-                }
-            }
-        }
-
-
+        val navController = findNavController(R.id.nav_host_fragment)
+        binding.navRail.setupWithNavController(navController)
 
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        val fm = supportFragmentManager.beginTransaction()
-        fm.replace(R.id.nav_host_fragment_containercoy, fragment)
-        fm.commit()
 
-    }
 }

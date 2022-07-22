@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -23,12 +24,6 @@ class DialogTransactionDetail : DialogFragment(){
     lateinit var binding:DialogDetailtransactionBinding
     private val viewModel: TransactionViewModel by viewModel()
 
-//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//        binding = DialogDetailtransactionBinding.inflate(LayoutInflater.from(context))
-//        return AlertDialog.Builder(requireActivity())
-//            .setView(binding.root)
-//            .create()
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,14 +42,29 @@ class DialogTransactionDetail : DialogFragment(){
         setView()
     }
 
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+    }
+
     private val dialogtransactiondetailadapter by lazy {
         DialogTransactionDetailAdapter(arrayListOf())
     }
 
     private fun setView() {
-        with(binding){
+
+            binding.recyclerView2.layoutManager = LinearLayoutManager(activity)
+            binding.recyclerView2.adapter = dialogtransactiondetailadapter
+            viewModel.getTransaction()
+
             viewModel.transactions.observe(viewLifecycleOwner,{
                 val data = it.data
+                dialogtransactiondetailadapter.clear()
+                it.data?.let { it1 -> dialogtransactiondetailadapter.addData(it1) }
+
 
                 var date = ""
                 var total_harga = 0.0
@@ -63,14 +73,8 @@ class DialogTransactionDetail : DialogFragment(){
 
                     date = d.date.toString()
 
-                    binding.recyclerView2.layoutManager = LinearLayoutManager(activity)
-                    binding.recyclerView2.adapter = dialogtransactiondetailadapter
-                    viewModel.getTransaction()
 
-                    dialogtransactiondetailadapter.clear()
-                    dialogtransactiondetailadapter.addData(detail!!)
 
-                    Log.d(TAG, "isiDetail: " +detail)
 
                     for (x in detail!!){
                         val harga = x.priceProduct
@@ -79,9 +83,12 @@ class DialogTransactionDetail : DialogFragment(){
                 }
 
 
-                tvDatetimedetailtransaksi.text = date
-                tvTotalhargadetailtransaksi.text = ProductConverter.decimalFormat(total_harga)
-                tvTotalpaymentdetailtransaksi.text = ProductConverter.decimalFormat(total_harga)
+                binding.tvDatetimedetailtransaksi.text = date
+                binding.tvTotalhargadetailtransaksi.text = ProductConverter.decimalFormat(total_harga)
+                binding.tvTotalpaymentdetailtransaksi.text = ProductConverter.decimalFormat(total_harga)
+
+
+
             })
 
 
@@ -90,7 +97,7 @@ class DialogTransactionDetail : DialogFragment(){
                 dismiss()
             }
 
-        }
+
     }
 
 

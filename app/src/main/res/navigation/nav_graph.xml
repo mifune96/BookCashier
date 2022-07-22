@@ -3,26 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/navigation_home">
+
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.tomuchcoffee.bookchasir.ui.auth.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        android:id="@+id/navigation_home"
+        android:name="com.tomuchcoffee.bookchasir.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.tomuchcoffee.bookchasir.ui.auth.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        android:id="@+id/navigation_transaction"
+        android:name="com.tomuchcoffee.bookchasir.ui.transaction.TransactionFragment"
+        android:label="TransactionFragment"
+        tools:layout="@layout/fragment_transaction"/>
 </navigation>
