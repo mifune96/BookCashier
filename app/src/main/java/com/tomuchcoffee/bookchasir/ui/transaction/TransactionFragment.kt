@@ -1,8 +1,10 @@
 package com.tomuchcoffee.bookchasir.ui.transaction
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,8 +45,17 @@ class TransactionFragment : Fragment(){
     private val transactionAdapter by lazy {
         TransactionAdapter(arrayListOf(),object : TransactionAdapter.onAdapterListener{
             override fun onClick(data: Data) {
-                var dialog = DialogTransactionDetail()
-                dialog.show(parentFragmentManager,"MyCustomDialog")
+
+
+                val bundle = Bundle()
+                 data.id?.let { bundle.putInt("id", it) }
+                val dialogFragment = DialogTransactionDetail()
+                dialogFragment.arguments = bundle
+                dialogFragment.show(requireActivity().supportFragmentManager, "dialog_event")
+
+//                var dialog = DialogTransactionDetail()
+//
+//                dialog.show(parentFragmentManager,"MyCustomDialog")
             }
 
         })
@@ -59,6 +70,10 @@ class TransactionFragment : Fragment(){
         viewModel.transactions.observe(viewLifecycleOwner,{
             transactionAdapter.clear()
             it.data?.let { it1 -> transactionAdapter.addData(it1) }
+
+            val man = it.data
+
+            Log.d(TAG, "isi man: " +man)
         })
 
         binding.edtSearch.addTextChangedListener(object : TextWatcher{

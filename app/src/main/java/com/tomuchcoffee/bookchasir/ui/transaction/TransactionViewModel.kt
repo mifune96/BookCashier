@@ -3,6 +3,7 @@ package com.tomuchcoffee.bookchasir.ui.transaction
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tomuchcoffee.bookchasir.source.model.transaction.DetailTransactionResponse
 import com.tomuchcoffee.bookchasir.source.model.transaction.TransactionResponse
 import com.tomuchcoffee.bookchasir.source.network.BookChasirRepository
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ class TransactionViewModel(
 ) : ViewModel() {
 
     val transactions by lazy { MutableLiveData<TransactionResponse>() }
+    val detail_transactions by lazy { MutableLiveData<DetailTransactionResponse>() }
     val message by lazy { MutableLiveData<String>() }
 
     init {
@@ -34,6 +36,13 @@ class TransactionViewModel(
             } catch (e: Exception){
                 message.value = "Terjadi Kesalahan"
             }
+        }
+    }
+
+    fun getDetailDtansaction(id: Int){
+        viewModelScope.launch {
+            val response = repository.getDetailTransaction(id)
+            detail_transactions.value =  response
         }
     }
 

@@ -1,18 +1,17 @@
 package com.tomuchcoffee.bookchasir.ui.adapter
 
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tomuchcoffee.bookchasir.databinding.DetailTransactionItemBinding
-import com.tomuchcoffee.bookchasir.databinding.TransactionItemBinding
-import com.tomuchcoffee.bookchasir.source.model.transaction.Data
-import com.tomuchcoffee.bookchasir.source.model.transaction.DetailTransaction
-import com.tomuchcoffee.bookchasir.util.ConvertDateFormat
-import com.tomuchcoffee.bookchasir.util.ProductConverter
+import com.tomuchcoffee.bookchasir.source.model.transaction.Data2
+import com.tomuchcoffee.bookchasir.source.model.transaction.DetailTransaction2
 
 class DialogTransactionDetailAdapter(
-    var dataList: ArrayList<Data>
+    var dataList: ArrayList<DetailTransaction2>
 ) :
     RecyclerView.Adapter<DialogTransactionDetailAdapter.ViewHolder>() {
 
@@ -34,19 +33,19 @@ class DialogTransactionDetailAdapter(
 
 
             with(binding) {
-//                val totalhargalist = transaction.priceProduct * transaction.quantity
-                tvNameitemDetailproduk.text = transaction.invoice
-                tvHargaItemDetailproduk.text = "$"+transaction.user
-                tvJumlahhargaTotalitem.text = transaction.invoice
-                tvJumlahPeritemdetail.text = transaction.invoice
+                val totalhargalist = transaction.priceProduct!! * transaction.quantity!!
+                tvNameitemDetailproduk.text = transaction.titleProduct
+                tvHargaItemDetailproduk.text = "$"+transaction.priceProduct
+                tvJumlahhargaTotalitem.text = totalhargalist.toString()
+                tvJumlahPeritemdetail.text = transaction.quantity.toString()
             }
         }
     }
 
     override fun getItemCount() = dataList.size
 
-    fun addData(data: List<Data>){
-        dataList.addAll(data)
+    fun addData(data: List<DetailTransaction2>?){
+        dataList.addAll(data!!)
     }
 
     fun clear(){

@@ -21,9 +21,21 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            app:layout_constraintBottom_toTopOf="@id/vw_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/vw_line"
+            android:layout_width="50dp"
+            android:layout_height="4dp"
+            android:background="@color/colorparent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@id/edt_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <EditText

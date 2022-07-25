@@ -10,6 +10,7 @@ import com.tomuchcoffee.bookchasir.source.model.checkout.CheckOutResponse
 import com.tomuchcoffee.bookchasir.source.model.checkout.Payload
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
 import com.tomuchcoffee.bookchasir.source.model.product.Products
+import com.tomuchcoffee.bookchasir.source.model.transaction.DetailTransactionResponse
 import com.tomuchcoffee.bookchasir.source.model.transaction.TransactionResponse
 import org.koin.dsl.module
 
@@ -44,6 +45,12 @@ class BookChasirRepository(
         keyword: String
     ): TransactionResponse {
         return api.getAllTransaction(keyword)
+    }
+
+    suspend fun getDetailTransaction(
+        id: Int
+    ): DetailTransactionResponse {
+        return api.getDetailTransaction(id)
     }
 
 
