@@ -16,19 +16,11 @@ Didalam aplikasi ini terdapat bebearapa fitur yaitu fitur sign-in,view dan cekou
 -ROOM
 -RESTFULAPI.*
 
-## Source Code
-- Backend : https://github.com/elfinsanjaya12/be-trello
-- Android : https://github.com/mifune96/TodoListApp
-
-
-
-
 #codeathome #retrofit #kotlin #android #AndroidNative #Okhttp #restfullapi #retsapi #MVVM #developer #programing #constraintlayout #BookCashier 
 
 Berikut Merupakan Demonya
 
 ![](https://media.giphy.com/media/Kk5fpYPmUFSUgUhorS/giphy.gif)
-
 
 ## DISCORD : https://discord.gg/8enGHX46
 
