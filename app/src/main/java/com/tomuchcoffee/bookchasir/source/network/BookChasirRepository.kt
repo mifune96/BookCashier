@@ -6,6 +6,7 @@ import androidx.lifecycle.map
 import com.tomuchcoffee.bookchasir.source.local.ProductDao
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthRequest
 import com.tomuchcoffee.bookchasir.source.model.auth.AuthResponse
+import com.tomuchcoffee.bookchasir.source.model.category.CategoryResponse
 import com.tomuchcoffee.bookchasir.source.model.checkout.CheckOutResponse
 import com.tomuchcoffee.bookchasir.source.model.checkout.Payload
 import com.tomuchcoffee.bookchasir.source.model.product.ProductResponse
@@ -31,8 +32,21 @@ class BookChasirRepository(
     }
 
     suspend fun GetAllProduct(
+        keyword: String
     ): ProductResponse {
-        return api.getProductAll()
+        return api.getProductAll(keyword)
+    }
+
+    suspend fun GetProductByCategory(
+        keyword: String,
+        categoryid: String
+    ): ProductResponse {
+        return api.getProductByCategory(keyword,categoryid)
+    }
+
+    suspend fun GetAllCategoryt(
+    ): CategoryResponse {
+        return api.getAllCategory()
     }
 
     suspend fun postCheckout(

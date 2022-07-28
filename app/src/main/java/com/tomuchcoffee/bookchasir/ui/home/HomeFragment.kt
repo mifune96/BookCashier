@@ -2,6 +2,8 @@ package com.tomuchcoffee.bookchasir.ui.home
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +11,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tomuchcoffee.bookchasir.databinding.FragmentHomeBinding
+import com.tomuchcoffee.bookchasir.source.model.category.Data
 import com.tomuchcoffee.bookchasir.source.model.checkout.CheckOutResponse
 import com.tomuchcoffee.bookchasir.source.model.checkout.Payload
 import com.tomuchcoffee.bookchasir.source.model.product.Products
+import com.tomuchcoffee.bookchasir.ui.adapter.CategoryAdapter
 import com.tomuchcoffee.bookchasir.ui.adapter.ProductAdapterOld
 import com.tomuchcoffee.bookchasir.ui.adapter.ProductCheckoutAdapter
 import com.tomuchcoffee.bookchasir.util.ProductConverter
@@ -73,6 +77,7 @@ class HomeFragment : Fragment() {
             var totalItem = 0
             for (d in it) {
                 val hargaitem = d.price
+
                 countBuyPrice += hargaitem * d.productbuyqty
                 val g = d.productbuyqty
                 totalItem += g
@@ -105,6 +110,29 @@ class HomeFragment : Fragment() {
         }
 
 
+        binding.edtSearch.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.keyword = s.toString()
+                viewModel.getProducts()
+            }
+
+        })
+
+        viewModel.getCategory()
+        binding.rvCategory.adapter = categoryAdapter
+        viewModel.category.observe(viewLifecycleOwner,{
+            categoryAdapter.clear()
+
+            categoryAdapter.add(it.data!!)
+        })
+
+
     }
 
 
@@ -115,6 +143,20 @@ class HomeFragment : Fragment() {
             }
         })
 
+    }
+
+    private val categoryAdapter by lazy {
+        CategoryAdapter(arrayListOf(),object : CategoryAdapter.OnAdapterListener{
+            override fun onClick(category: Data) {
+                if (category.id == 0){
+                    viewModel.getProducts()
+                }
+                viewModel.categoryid = category.id.toString()
+                viewModel.getProductsByCategory()
+                Log.d(TAG, "isi ID: "+ category.id)
+            }
+
+        })
     }
 
 }
