@@ -34,9 +34,9 @@ class SiginInActivity : AppCompatActivity() {
         btnSignIn.setOnClickListener {
             viewModel.login(
                 AuthRequest(
-//                    tvEmail.text.toString(),
-//                    tvPassword.text.toString()
-                    "admin@gmail.com", "rahasia"
+                    tvEmail.text.toString(),
+                    tvPassword.text.toString()
+//                    "admin@gmail.com", "rahasia"
 
                 )
 

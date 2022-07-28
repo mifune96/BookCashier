@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tomuchcoffee.bookchasir.databinding.FragmentHomeBinding
@@ -70,7 +71,17 @@ class HomeFragment : Fragment() {
         binding.rvItemcheckout.layoutManager = LinearLayoutManager(activity)
         binding.rvItemcheckout.adapter = setupAdapter
 
+
         viewModel.showAllDao.observe(viewLifecycleOwner, {
+
+            if (it.isEmpty()){
+                binding.ivEmpty.visibility = View.VISIBLE
+                binding.rvItemcheckout.visibility = View.GONE
+            } else{
+                binding.ivEmpty.visibility = View.GONE
+                binding.rvItemcheckout.visibility = View.VISIBLE
+            }
+
             setupAdapter.submitList(it)
             Log.d(TAG, "isi dao: " + it)
             var countBuyPrice = 0.0
@@ -84,6 +95,8 @@ class HomeFragment : Fragment() {
             }
             binding.tvTotalPayment.text = ProductConverter.decimalFormat(countBuyPrice)
             binding.tvCheckoutItem.text = totalItem.toString()
+//            binding.ivEmpty.visibility = View.GONE
+
         })
 
         binding.tvClearAll.setOnClickListener {
@@ -110,7 +123,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding.edtSearch.addTextChangedListener(object : TextWatcher{
+        binding.edtSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -126,7 +139,7 @@ class HomeFragment : Fragment() {
 
         viewModel.getCategory()
         binding.rvCategory.adapter = categoryAdapter
-        viewModel.category.observe(viewLifecycleOwner,{
+        viewModel.category.observe(viewLifecycleOwner, {
             categoryAdapter.clear()
 
             categoryAdapter.add(it.data!!)
@@ -146,14 +159,14 @@ class HomeFragment : Fragment() {
     }
 
     private val categoryAdapter by lazy {
-        CategoryAdapter(arrayListOf(),object : CategoryAdapter.OnAdapterListener{
+        CategoryAdapter(arrayListOf(), object : CategoryAdapter.OnAdapterListener {
             override fun onClick(category: Data) {
-                if (category.id == 0){
+                if (category.id == 0) {
                     viewModel.getProducts()
                 }
                 viewModel.categoryid = category.id.toString()
                 viewModel.getProductsByCategory()
-                Log.d(TAG, "isi ID: "+ category.id)
+                Log.d(TAG, "isi ID: " + category.id)
             }
 
         })
